@@ -3,8 +3,11 @@ package den.ter.feature_home.presentation
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import den.ter.core.di.CoreComponent
+import den.ter.core.di.DaggerCoreComponent
 import den.ter.feature_home.data.Repository
 import den.ter.feature_home.di.DaggerHomeComponent
+import den.ter.feature_home.di.HomeModule
 import den.ter.feature_home.domain.models.Morty
 import den.ter.feature_home.domain.models.resp2.two
 import den.ter.feature_home.domain.usecases.FirstUseCase
@@ -24,7 +27,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
 
     init {
-        val comp = DaggerHomeComponent.create()
+        val comp = DaggerHomeComponent.builder()
+            .coreComponent(DaggerCoreComponent.create())
+            .homeModule(HomeModule())
+            .build()
+
+
+
         comp.inject(this)
     }
 

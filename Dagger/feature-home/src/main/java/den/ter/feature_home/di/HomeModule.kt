@@ -9,15 +9,17 @@ import den.ter.feature_home.data.ApiService
 import den.ter.feature_home.data.SecondApiService
 import retrofit2.Retrofit
 
-@Module(includes = [CoreModule::class])
+@Module
 class HomeModule {
 
     @Provides
+    @HomeScope
     fun provideApiService(@First retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
     @Provides
+    @HomeScope
     fun provideSecondApiService(@Second retrofit: Retrofit): SecondApiService {
         return retrofit.create(SecondApiService::class.java)
     }

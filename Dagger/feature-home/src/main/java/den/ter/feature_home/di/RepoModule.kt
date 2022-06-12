@@ -10,6 +10,5 @@ import javax.inject.Singleton
 interface RepoModule {
 
     @Binds
-    @Singleton
     fun provideRepo(repository: Repository): RepositoryInterface
 }

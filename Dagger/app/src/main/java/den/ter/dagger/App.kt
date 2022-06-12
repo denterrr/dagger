@@ -6,6 +6,7 @@ import den.ter.core.di.DaggerCoreComponent
 import den.ter.dagger.di.*
 import den.ter.feature_home.di.DaggerHomeComponent
 import den.ter.feature_home.di.HomeComponent
+import den.ter.feature_home.di.HomeModule
 
 class App: Application() {
 
@@ -16,6 +17,9 @@ class App: Application() {
         super.onCreate()
         appComponent = DaggerAppComponent.create()
         coreComponent = DaggerCoreComponent.create()
-        homeComponent = DaggerHomeComponent.create()
+        homeComponent = DaggerHomeComponent.builder()
+            .coreComponent(DaggerCoreComponent.create())
+            .homeModule(HomeModule())
+            .build()
     }
 }
